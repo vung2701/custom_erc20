@@ -1,0 +1,10 @@
+mkdir erc20-project
+cd erc20-project
+npm init -y
+npm install --save-dev hardhat
+npx hardhat
+npx hardhat compile
+npx hardhat test
+npx hardhat node
+npx hardhat run scripts/deploy.js --network localhost
+npx hardhat run scripts/deploy.js --network sepolia
