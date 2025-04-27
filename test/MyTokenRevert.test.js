@@ -35,9 +35,9 @@ describe("MyToken - Các test nâng cao", function () {
 
   // Bỏ qua test mint nếu contract chưa có hàm mint
   // Nếu bạn có hàm mint thì mở comment ra
-  //   it("Chỉ owner mới có thể mint (nếu có)", async () => {
-  //     await expect(
-  //       token.connect(addr1).mint(addr1.address, ethers.parseEther("100"))
-  //     ).to.be.reverted;
-  //   });
+  it("Chỉ owner mới có thể mint (nếu có)", async () => {
+    await expect(
+      token.connect(addr1).mint(addr1.address, ethers.parseEther("100"))
+    ).to.be.reverted;
+  });
 });

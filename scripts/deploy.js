@@ -1,11 +1,15 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const Token = await ethers.getContractFactory("MyToken");
-  const token = await Token.deploy(ethers.parseEther("1000"));
-  await token.waitForDeployment();
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying contract with address:", deployer.address);
 
-  console.log(`Token đã được deploy tại địa chỉ: ${token.target}`);
+  const MyToken = await ethers.getContractFactory("MyToken");
+  const myToken = await MyToken.deploy(ethers.parseEther("1000")); // 1000 token
+
+  await myToken.waitForDeployment();
+
+  console.log("Token deployed to:", await myToken.getAddress());
 }
 
 main().catch((error) => {

@@ -46,8 +46,6 @@ describe("MyToken", function () {
 
   it("TransferFrom bởi người được approve", async function () {
     await token.approve(addr1.address, ethers.parseEther("200"));
-
-    // Đóng vai addr1 gọi transferFrom
     await token
       .connect(addr1)
       .transferFrom(owner.address, addr2.address, ethers.parseEther("100"));
@@ -57,17 +55,19 @@ describe("MyToken", function () {
   });
 
   it("Chuyển token từ addr1 sang addr2", async function () {
-    // Đầu tiên, chuyển token cho addr1
     await token.transfer(addr1.address, ethers.parseEther("100"));
-
-    // Addr1 approve cho owner
     await token.connect(addr1).approve(owner.address, ethers.parseEther("50"));
-
     await token
       .connect(owner)
       .transferFrom(addr1.address, addr2.address, ethers.parseEther("50"));
 
     const balance2 = await token.balanceOf(addr2.address);
     expect(balance2).to.equal(ethers.parseEther("50"));
+  });
+
+  it("Owner can mint tokens", async function () {
+    await token.mint(addr1.address, ethers.parseEther("500"));
+    const balance = await token.balanceOf(addr1.address);
+    expect(balance).to.equal(ethers.parseEther("500"));
   });
 });
