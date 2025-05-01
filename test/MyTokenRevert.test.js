@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 require("@nomicfoundation/hardhat-chai-matchers"); // 💥 Import cần thiết để dùng reverted
 
-describe("MyToken - Các test nâng cao", function () {
+describe("MyToken - Các test Revert", function () {
   let Token, token, owner, addr1, addr2;
 
   beforeEach(async function () {

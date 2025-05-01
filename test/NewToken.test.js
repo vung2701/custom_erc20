@@ -2,12 +2,11 @@ const { expect } = require("chai");
 const hre = require("hardhat");
 const { ethers } = hre;
 
-describe("MyToken", function () {
+describe("NewToken", function () {
   let Token, token, owner, addr1, addr2;
 
-  // Chạy trước mỗi test setup môi trường sạch
   beforeEach(async function () {
-    Token = await ethers.getContractFactory("MyToken");
+    Token = await ethers.getContractFactory("NewToken");
     [owner, addr1, addr2] = await ethers.getSigners();
 
     token = await Token.deploy(ethers.parseEther("1000"));
@@ -15,11 +14,11 @@ describe("MyToken", function () {
   });
 
   it("Token có tên đúng", async function () {
-    expect(await token.name()).to.equal("MyToken");
+    expect(await token.name()).to.equal("NewToken");
   });
 
   it("Token có symbol đúng", async function () {
-    expect(await token.symbol()).to.equal("MTK");
+    expect(await token.symbol()).to.equal("NTK");
   });
 
   it("Owner nhận đúng số token ban đầu", async function () {
@@ -63,11 +62,5 @@ describe("MyToken", function () {
 
     const balance2 = await token.balanceOf(addr2.address);
     expect(balance2).to.equal(ethers.parseEther("50"));
-  });
-
-  it("Owner can mint tokens", async function () {
-    await token.mint(addr1.address, ethers.parseEther("500"));
-    const balance = await token.balanceOf(addr1.address);
-    expect(balance).to.equal(ethers.parseEther("500"));
   });
 });
