@@ -3,13 +3,6 @@ require("dotenv").config();
 
 module.exports = {
   solidity: "0.8.28",
-  // Giảm phí deploy
-  settings: {
-    optimizer: {
-      enabled: true,
-      runs: 100,
-    },
-  },
   networks: {
     localhost: {
       url: "http://127.0.0.1:8545",
@@ -18,6 +11,7 @@ module.exports = {
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,
       accounts: [process.env.PRIVATE_KEY],
+      gasPrice: 20000000000,
     },
   },
   etherscan: {
