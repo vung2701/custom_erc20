@@ -12,7 +12,7 @@ async function main() {
   const NewToken = await ethers.getContractFactory("NewToken");
   const newToken = await NewToken.deploy(ethers.parseEther("1000"));
   await newToken.waitForDeployment();
-  console.log("New Token deployed to:", await NewToken.getAddress());
+  console.log("New Token deployed to:", await newToken.getAddress());
 }
 
 main().catch((error) => {
