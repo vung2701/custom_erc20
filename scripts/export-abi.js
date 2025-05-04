@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const CONTRACT_NAME = "NewToken";
+const CONTRACT_NAME = "CustomToken"; // Replace with your contract name
 
 async function main() {
   const artifactPath = path.join(

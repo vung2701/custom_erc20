@@ -1,18 +1,25 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
-  console.log("Deploying contract with address:", deployer.address);
+  const Token = await ethers.getContractFactory("CustomToken");
 
-  const MyToken = await ethers.getContractFactory("MyToken");
-  const myToken = await MyToken.deploy(ethers.parseUnits("1000", 18));
+  // Deploy MyToken
+  const myToken = await Token.deploy(
+    "MyToken",
+    "MTK",
+    ethers.parseUnits("1000000", 18)
+  );
   await myToken.waitForDeployment();
-  console.log("My Token deployed to:", await myToken.getAddress());
+  console.log("MyToken deployed to:", await myToken.getAddress());
 
-  const NewToken = await ethers.getContractFactory("NewToken");
-  const newToken = await NewToken.deploy(ethers.parseEther("1000"));
+  // Deploy NewToken
+  const newToken = await Token.deploy(
+    "NewToken",
+    "NTK",
+    ethers.parseUnits("1000000", 18)
+  );
   await newToken.waitForDeployment();
-  console.log("New Token deployed to:", await newToken.getAddress());
+  console.log("NewToken deployed to:", await newToken.getAddress());
 }
 
 main().catch((error) => {
